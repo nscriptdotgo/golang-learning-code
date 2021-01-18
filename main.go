@@ -11,8 +11,10 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
+
 var token string = os.Getenv("TOKEN")
 var port string = os.Getenv("PORT")
+
 // Constants
 const (
 	BaseURL = "https://api.openweathermap.org/data/2.5"
@@ -112,7 +114,11 @@ func getCurrentWeatherByZipCode(w http.ResponseWriter, r *http.Request) {
 func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/currentweather/{zipCode}", getCurrentWeatherByZipCode)
-	log.Fatal(http.ListenAndServe(port, myRouter))
+	if os.Getenv("ENVIRONMENT") == "prod" {
+		log.Fatal(http.ListenAndServe(":", myRouter))
+	} else {
+		log.Fatal(http.ListenAndServe(":8080", myRouter))
+	}
 }
 
 func main() {
