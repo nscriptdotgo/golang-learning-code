@@ -38,7 +38,7 @@ type Weather struct {
 // Main struct, contains the actual weather data
 type Main struct {
 	Temp      float64 `json:"temp"`
-	FeelsLike float64 `json:"feels_like"`
+	FeelsLike float64 `json:"feels_like_a_burrito"`
 	TempMin   float64 `json:"temp_min"`
 	TempMax   float64 `json:"temp_max"`
 	Pressure  int     `json:"pressure"`
