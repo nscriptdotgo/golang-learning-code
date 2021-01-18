@@ -11,23 +11,24 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
-
+// Constants
 const (
 	BaseURL = "https://api.openweathermap.org/data/2.5"
 	Unit    = "imperial"
 )
-
+// Coord struct
 type Coord struct {
 	Lon float64 `json:"lon"`
 	Lat float64 `json:"lat"`
 }
-
+// Weather struct
 type Weather struct {
 	ID          int    `json:"id"`
 	Main        string `json:"main"`
 	Description string `json:"description"`
 	Icon        string `json:"icon"`
 }
+// Main struct, contains the actual weather data
 type Main struct {
 	Temp      float64 `json:"temp"`
 	FeelsLike float64 `json:"feels_like"`
@@ -36,15 +37,16 @@ type Main struct {
 	Pressure  int     `json:"pressure"`
 	Humidity  int     `json:"humidity"`
 }
+// Wind struct, information about wind
 type Wind struct {
 	Speed float64 `json:"speed"`
 	Deg   int     `json:"deg"`
 }
-
+// Clouds struct
 type Clouds struct {
 	All int `json:"all"`
 }
-
+// Sys struct
 type Sys struct {
 	Type    int     `json:"type"`
 	ID      int     `json:"id"`
@@ -53,13 +55,7 @@ type Sys struct {
 	Sunrise int     `json:"sunrise"`
 	Sunset  int     `json:"sunset"`
 }
-
-type SimpleCurrentWeatherData struct {
-	Name      string `json:"name"`
-	Base      string `json:"base"`
-	FeelsLike string `json:"feels_like"`
-}
-
+// CurrentWeatherData struct for getting current weather.
 type CurrentWeatherData struct {
 	Coord      Coord     `json:"coords"`
 	Weather    []Weather `json:"weather"`
