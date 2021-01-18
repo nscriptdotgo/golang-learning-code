@@ -89,8 +89,9 @@ func getCurrentWeatherByZipCode(w http.ResponseWriter, r *http.Request) {
 	token := os.Getenv("TOKEN")
 	vars := mux.Vars(r)
 	zipCode := vars["zipCode"]
+	countryCode := vars["countryCode"]
 	// Make API call with above vars, returns Response object
-	resp, err := http.Get(fmt.Sprintf("%s/weather?zip=%s,us&units=%s&appid=%s", BaseURL, zipCode, Unit, token))
+	resp, err := http.Get(fmt.Sprintf("%s/weather?zip=%s,%s&units=%s&appid=%s", BaseURL, zipCode, countryCode, Unit, token))
 	log.Print(resp.Request)
 	// catch error if error
 	if err != nil {
@@ -113,7 +114,7 @@ func getCurrentWeatherByZipCode(w http.ResponseWriter, r *http.Request) {
 
 func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
-	myRouter.HandleFunc("/currentweather/{zipCode}", getCurrentWeatherByZipCode)
+	myRouter.HandleFunc("/currentweather/{zipCode}/{countryCode}", getCurrentWeatherByZipCode)
 	if os.Getenv("ENVIRONMENT") == "prod" {
 		log.Fatal(http.ListenAndServe(":"+port, myRouter))
 	} else {
