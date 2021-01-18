@@ -108,7 +108,7 @@ func getCurrentWeatherByZipCode(w http.ResponseWriter, r *http.Request) {
 	// Unmarshal the byte slice and store into new weatherDataObject var
 	json.Unmarshal(responseData, &weatherDataObject)
 
-	json.NewEncoder(w).Encode(weatherDataObject)
+	json.NewEncoder(w).Encode(weatherDataObject.Main)
 }
 
 func handleRequests() {
