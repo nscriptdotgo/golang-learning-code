@@ -9,8 +9,11 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 )
+
+var token = os.Getenv("TOKEN")
+var port = os.Getenv("PORT")
 
 // Constants
 const (
@@ -116,14 +119,11 @@ func handleRequests() {
 
 func main() {
 	log.Print("==== Starting OpenWeather Golang Custom API ====")
-	log.Print("Loading dotenv variables from file...")
-	// godotenv.Load()
-	err := godotenv.Exec(".env", os.Getenv("TOKEN"), os.Getenv("PORT"))
-	if err != nil {
-		log.Fatal("Error: ", err)
-	}
-	token := os.Getenv("TOKEN")
-	port := os.Getenv("PORT")
+	// log.Print("Loading dotenv variables from file...")
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal("Error: ", err)
+	// }
 	log.Print("Environment variables loaded!")
 	log.Print("==== Started OpenWeather Golang Custom API ====")
 	handleRequests()
