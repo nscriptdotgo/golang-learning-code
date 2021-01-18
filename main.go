@@ -115,7 +115,7 @@ func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/currentweather/{zipCode}", getCurrentWeatherByZipCode)
 	if os.Getenv("ENVIRONMENT") == "prod" {
-		log.Fatal(http.ListenAndServe(":", myRouter))
+		log.Fatal(http.ListenAndServe(":"+port, myRouter))
 	} else {
 		log.Fatal(http.ListenAndServe(":8080", myRouter))
 	}
