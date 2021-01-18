@@ -111,13 +111,14 @@ func getCurrentWeatherByZipCode(w http.ResponseWriter, r *http.Request) {
 func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/currentweather/{zipCode}", getCurrentWeatherByZipCode)
-	log.Fatal(http.ListenAndServe(":8080", myRouter))
+	log.Fatal(http.ListenAndServe(os.Getenv("PORT"), myRouter))
 }
 
 func main() {
 	log.Print("==== Starting OpenWeather Golang Custom API ====")
 	log.Print("Loading token from environment...")
 	os.Getenv("TOKEN")
+	os.Getenv("PORT")
 	log.Print("Loading dotenv variables from file...")
 	err := godotenv.Load()
 	if err != nil {
