@@ -9,12 +9,10 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
-	// "github.com/joho/godotenv"
+	"github.com/joho/godotenv"
 )
-
-var token = os.Getenv("TOKEN")
-var port = os.Getenv("PORT")
-
+var token string = os.Getenv("TOKEN")
+var port string = os.Getenv("PORT")
 // Constants
 const (
 	BaseURL = "https://api.openweathermap.org/data/2.5"
@@ -114,16 +112,18 @@ func getCurrentWeatherByZipCode(w http.ResponseWriter, r *http.Request) {
 func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/currentweather/{zipCode}", getCurrentWeatherByZipCode)
-	log.Fatal(http.ListenAndServe(os.Getenv("PORT"), myRouter))
+	log.Fatal(http.ListenAndServe(port, myRouter))
 }
 
 func main() {
 	log.Print("==== Starting OpenWeather Golang Custom API ====")
-	// log.Print("Loading dotenv variables from file...")
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.Fatal("Error: ", err)
-	// }
+	log.Print("Loading dotenv variables from file...")
+	if os.Getenv("ENVIRONMENT") != "prod" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("Error: ", err)
+		}
+	}
 	log.Print("Environment variables loaded!")
 	log.Print("==== Started OpenWeather Golang Custom API ====")
 	handleRequests()
