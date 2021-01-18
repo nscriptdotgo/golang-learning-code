@@ -116,14 +116,14 @@ func handleRequests() {
 
 func main() {
 	log.Print("==== Starting OpenWeather Golang Custom API ====")
-	log.Print("Loading token from environment...")
-	os.Getenv("TOKEN")
-	os.Getenv("PORT")
 	log.Print("Loading dotenv variables from file...")
-	err := godotenv.Load()
+	// godotenv.Load()
+	err := godotenv.Exec(".env", os.Getenv("TOKEN"), os.Getenv("PORT"))
 	if err != nil {
 		log.Fatal("Error: ", err)
 	}
+	token := os.Getenv("TOKEN")
+	port := os.Getenv("PORT")
 	log.Print("Environment variables loaded!")
 	log.Print("==== Started OpenWeather Golang Custom API ====")
 	handleRequests()
