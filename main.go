@@ -122,7 +122,7 @@ func main() {
 	log.Print("Loading dotenv variables from file...")
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error")
+		log.Fatal("Error: ", err)
 	}
 	log.Print("Environment variables loaded!")
 	log.Print("==== Started OpenWeather Golang Custom API ====")
