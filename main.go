@@ -112,7 +112,6 @@ func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
-	} else {
 		os.Getenv("TOKEN")
 	}
 	log.Print("Environment variables loaded!")
